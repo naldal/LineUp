@@ -1,0 +1,85 @@
+@charset "utf-8";
+.column.is-four-fifths {
+    width: 100% !important;
+    margin: 0;
+    font-family: "Nanum Gothic", sans-serif !important;
+}
+
+label {
+    margin-top: 24px;
+}
+.label.is-menu {
+    margin: 40px auto 20px;
+}
+.box {
+    padding: 1.25rem 7.25rem;
+}
+
+input.input.is-rounded {
+    width: 500px;
+}
+
+.field > .input.is-rounded {
+    width: 500px;
+}
+
+.field > .input.is-rounded.is-success {
+    width: 500px !important;
+}
+
+p.control.is-expanded > input.input.is-rounded {
+    width: 400px;
+}
+
+label.label.is-menu {
+    display: inline-block;
+}
+
+div.field > div.control {
+    margin-top: 50px;
+    font-weight: 600;
+    font-family: "Rubik", sans-serif !important;
+}
+
+div.field > div.control > label.label {
+    font-family: "Nanum Gothic", sans-serif !important;
+    margin-right: 30px;
+}
+
+div.field > div.control > input.input.is-normal {
+    width: 150px;
+}
+
+div.file.is-primary.has-name {
+    display: block;
+}
+
+div.field > div.file.is-warning.has-name {
+    display: block;
+}
+
+div.field.is-grouped {
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+#vch {
+    margin-top: 50px;
+}
+
+.scrolltop {
+    display: none;
+    position: fixed;
+    right: 30px;
+    bottom: 50px;
+    z-index: 1030;
+    font-size: 1.875rem;
+    color: #868e96;
+    transition: all 0.5s ease-in-out;
+    opacity: 0.8;
+}
+.scrolltop:hover,
+.scrolltop:focus {
+    color: #dc3545;
+    transition: all 0.5s ease-in-out;
+}

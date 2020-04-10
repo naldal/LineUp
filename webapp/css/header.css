@@ -1,0 +1,53 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.image {
+    position: relative;
+}
+
+.imgText p#p1 {
+    position: absolute !important;
+    top: 30%;
+    left: 50%;
+    color: white;
+    font-weight: bold;
+    transform: translate(-45%, -50%);
+    font-size: 30px;
+    font-family: "Poppins", sans-serif;
+}
+/* .imgText span.p1 {
+    position: absolute !important;
+    top: 34%;
+    left: 50%;
+    color: white;
+    font-weight: bold;
+    transform: translate(-45%, -50%);
+    font-size: 30px;
+    font-family: "Poppins", sans-serif;
+    display: none;
+} */
+
+.imgText p#p2 {
+    position: absolute !important;
+    top: 43%;
+    left: 50%;
+    color: white;
+    transform: translate(-50%, -50%);
+    font-size: 120px;
+    font-weight: bolder;
+    font-family: "Kaushan Script";
+}
+
+.button.is-warning {
+    color: white;
+}
+
+.button.is-warning {
+    background-color: #e66767;
+}
+
+#navbarBasic {
+    font-family: "Sen", sans-serif;
+}

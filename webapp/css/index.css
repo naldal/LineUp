@@ -1,0 +1,258 @@
+* {
+    font-family: "Rubik", sans-serif;
+}
+
+html {
+	scroll-behavior : smooth;
+}
+
+body {
+    background: #f2f2f2;
+}
+
+.carousel-wrap img {
+    border-radius: 30px;
+}
+
+#search-wrap {
+    margin-top: 20px;
+    top: 15px;
+    position: sticky;
+    z-index: 40;
+}
+
+#search-wrap .container .heading {
+    font-size: 20pt;
+    text-align: center;
+}
+
+#search-wrap .container .search {
+    width: 80%;
+    height: 36px;
+    position: relative;
+}
+
+#search-wrap .container .search .searchButton {
+    position: absolute;
+    left: 78%;
+    width: 40px;
+    height: 36px;
+    border: 1px solid #00b4cc;
+    background: #00b4cc;
+    text-align: center;
+    color: #fff;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+#search-wrap .container .search .searchTerm {
+    position: absolute;
+    left: 18%;
+    width: 500px;
+    border: 3px solid #00b4cc;
+    border-right: none;
+    padding: 5px;
+    height: 36px;
+    border-radius: 5px 0 0 5px;
+    outline: none;
+    color: #9dbfaf;
+    width: 500px;
+}
+
+.vegan {
+    font-size: 9pt;
+    font-weight: bold;
+    text-align: center;
+    padding-bottom: 100px;
+}
+
+.searchTerm:focus {
+    color: #00b4cc;
+}
+
+#best_restaurang_list {
+    width: 1170px;
+    height: 600px;
+    overflow: hidden;
+    position: relative;
+    margin: 0 auto;
+    padding: 35px;
+}
+
+#best_restaurang_list #list-cover {
+    border-radius: 10px;
+    width: 350px;
+    padding: 0 15px;
+    margin: 5px 20px;
+    float: left;
+    border-radius: 10px;
+}
+
+#best_restaurang_list #list-cover #list-cover-subject {
+    margin: 0 auto;
+    margin-top: 15px;
+    border-bottom: 1px solid rgb(217, 221, 229, 1);
+    text-align: left;
+    font-size: 20pt;
+    font-weight: bold;
+    width: 90%;
+}
+
+#best_restaurang_list #list-cover #list-cover-subject h2 {
+    font-family: "Gugi", cursive;
+}
+
+#best_restaurang_list #list-cover .card-content .content p {
+    font-family: "Gugi", cursive;
+}
+
+#best_restaurang_list #best-list {
+    padding: 15px 15px;
+    width: 100%;
+    height: 60%;
+    width: 100%;
+}
+
+#best_restaurang_list #carousel {
+    overflow: hidden;
+    display: inline;
+}
+
+#best_restaurang_list #carousel #best-list .card {
+    cursor: pointer;
+}
+
+#best_restaurang_list #carousel #best-list .card:hover {
+    background-color: #f2f2f2;
+}
+
+.restaurantList {
+    overflow: auto;
+}
+
+.restaurantList .container {
+    overflow: auto;
+}
+
+.restaurantList #l1 {
+    width: 45%;
+    height: 183px;
+    float: left;
+    margin: 15px 2.3%;
+	overflow: hidden;
+}
+
+.restaurantList #l1 .card-image {
+    width: 200px;
+    height: 200px;
+    float: left;
+}
+
+.restaurantList #l1 .content {
+    width: 60%;
+    height: 200px;
+   /*  float: right; */
+}
+
+.navbar {
+    position: sticky !important;
+    top: 0px !important;
+}
+
+/* carousel slide */
+#carousel {
+    position: absolute;
+    left: -390px;
+    width: 9999px;
+}
+
+#carousel .no {
+    display: inline-block;
+}
+
+/* image slide */
+.carousel-wrap {
+    margin: 90px auto;
+    padding: 0 5%;
+    width: 81%;
+    position: relative;
+}
+
+/* fix blank or flashing items on carousel */
+.owl-carousel .item {
+    position: relative;
+    z-index: 100;
+    -webkit-backface-visibility: hidden;
+}
+
+/* end fix */
+.owl-nav > div {
+    margin-top: -26px;
+    position: absolute;
+    top: 50%;
+    color: #cdcbcd;
+}
+
+.owl-nav i {
+    font-size: 52px;
+}
+
+.owl-nav .owl-prev {
+    left: -30px;
+}
+
+.owl-nav .owl-next {
+    right: -30px;
+}
+
+/* search box */
+.input.is-warning {
+    display: inline-block;
+    width: 400px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+
+#searchOption {
+       background-color: #ffdb4a;
+     border:none;
+     border-radius:5px;
+    color: white;
+    padding: 12px;
+    width: 97px;
+    height: 41px;
+    font-size: 13px;
+    font-weight:bold;
+/*   box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2); */
+  -webkit-appearance: button;
+  appearance: button;
+  outline: none;
+}
+
+#searchOption::before {
+	border:none;
+  content: "\f13a";
+  font-family: FontAwesome;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 20%;
+  height: 100%;
+  text-align: center;
+  font-size: 28px;
+  line-height: 45px;
+  color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(255, 255, 255, 0.1);
+  pointer-events: none;
+}
+
+#searchOption:hover::before {
+  color: rightpink;
+  background-color: rightpink;
+}
+
+#searchOption option {
+  padding: 30px;
+}

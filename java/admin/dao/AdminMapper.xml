@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="AdminSQL">
+
+<select id="getMemberData" resultType="member">
+	<![CDATA[
+		select * from 
+			(select rownum rn, tt.* 
+			 from 
+				(select * 
+				 from member 
+				 order by seq_member)
+			 tt ) 
+		where rn >= #{startNum} and rn <= #{endNum}
+	]]>
+</select>
+
+<select id="getTotalNumber" resultType="int">
+	select count(*) from member
+</select>
+
+<insert id="moveMember" parameterType="int">
+	insert into deletedMember select * from member where seq_member = #{seq_member}
+</insert>
+
+<delete id="deleteMember" parameterType="int">
+	delete from member where seq_member = #{seq_member} 
+</delete>
+
+<select id="getDeletedMemberData" resultType="member">
+	select * from deletedMember order by seq_member asc
+</select>
+
+<insert id="MoveToMember" parameterType="String">
+	insert into Member select * from deletedMember where seq_member = #{seq_member}
+</insert>
+
+<delete id="deleteFromRevertedMember" parameterType="String">
+	delete from deletedMember where seq_member = #{seq_member}
+</delete>
+
+<insert id="goToBlack" parameterType="String">
+	 begin
+	    insert into blackList 
+	    	select 
+			    seq_member, 
+			    position, 
+			    real_name, 
+			    nickname, 
+			    id, 
+			    tel, 
+			    company_num, 
+			    log_time, 
+			    authstatus, 
+			    reservation,
+			    null
+	    	from deletedMember
+	    	where seq_member = #{seq_member};
+	    	
+	   	 delete from deletedMember where seq_member = #{seq_member};
+	  end;
+</insert>
+
+<select id="setReason" parameterType="String" resultType="admin.bean.BlackMember">
+	update blackList set reason = #{reason} where seq_member = #{seq_member}
+</select>
+
+<select id="getBlockedMember" resultType="admin.bean.BlackMember">
+	select * from blackList order by seq_member
+</select>
+
+
+<delete id="strongrevert">
+	delete from blackList where seq_member = #{seq_member}
+</delete>
+
+</mapper>

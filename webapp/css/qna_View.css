@@ -1,0 +1,29 @@
+@charset "UTF-8";
+
+*{
+	font-family: 'Rubik', "Nanum Gothic",sans-serif !important;
+}
+
+#qna_view_form{
+	width: 900px;
+	margin: 0 auto;
+}
+
+#qna_view_form table{
+	margin: 30px auto;
+	line-height: 30px;
+	font-size: 13pt;
+}
+
+#qna_view_form table td{
+	padding:15px 20px;
+}
+#qna_view_form table tr{
+	border-bottom: 1px solid rgba(0,0,0,0.3);
+}
+
+#qna_view_form #qna_view_subject{
+	border-bottom:1px solid gray;
+	font-size: 30pt;
+	font-weight: 200;
+}

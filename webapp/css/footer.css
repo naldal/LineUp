@@ -1,0 +1,14 @@
+strong {
+    color: #ecf0f1;
+}
+a {
+    color: tomato;
+}
+
+p#imp a {
+    color: #2ecc71;
+}
+
+p strong {
+    color: tomato;
+}

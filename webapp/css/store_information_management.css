@@ -1,0 +1,259 @@
+@charset "UTF-8";
+
+body{
+	font-family: 'Rubik', "Nanum Gothic",sans-serif !important; 
+}
+
+#reservation_time .is-normal{
+	width: 150px;
+}
+#reservation_time .label{
+	display: inherit;
+}
+
+#loadHeader{
+	margin-bottom:50px;
+}
+#loadFooter{
+	margin-top:50px;
+}
+#wrap .hero.is-light.is-fullheight {
+    background-color: white;
+}
+
+#menupan-table {
+    width: 300px;
+}
+
+#menupan-table .table {
+    margin: 0 auto;
+    width: 600px;
+}
+
+#menupan-table .table th {
+    width: 50%;
+    text-align: center;
+}
+
+
+#subimg {
+    display: block;
+    width:420px;
+}
+
+#subimg .file-label {
+    padding:10px 0;
+}
+
+#date-form img {
+    margin-top: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+#date-form #date {
+    float: left;
+    width: 140px;
+    text-align: center;
+}
+
+.message-header {
+    margin-top: 5px;
+}
+
+.message-header table {
+    width: 100%;
+    color: white;
+}
+
+.message-header table td {
+    text-align: center;
+    width: 18%;
+}
+
+#users {
+    background-color: gray;
+    border-radius: 0;
+}
+
+/* 리뷰 테이블 관리 */
+.review-table {
+    width: 100%;
+}
+.review-table tr {
+    line-height: 2;
+}
+
+/* 예약관리 펼치기 접기 -시작  */
+#Reservation-Management {
+    overflow: hidden;
+}
+#review_box_shadow .box{
+	box-shadow: 0 0.5em 1em -0.125em rgba(10,10,10,0), 0 0 0 1px rgba(10,10,10,0.1) !important;
+	
+}
+#Reservation-List {
+    margin-top: 5px;
+    cursor: pointer;
+    padding: 0 3px;
+    background-color: rgba(220, 220, 220, 0.8);
+    text-align: center;
+}
+
+/* 예약관리 대기 시작 버튼*/
+
+/* 레스토랑 리뷰 글내용 펼치기 접기 -시작  */
+#content {
+    max-height: 150px;
+    overflow: hidden;
+    padding: 10px 10px;
+}
+
+.review-content {
+    cursor: pointer;
+    padding: 0 3px;
+    background-color: rgba(220, 220, 220, 0.8);
+    text-align: center;
+}
+
+/* 레스토랑  리뷰 리스트 펼치기 및 접기  -시작  */
+#my-restaurang-review-list {
+    overflow: hidden;
+    padding: 5px;
+}
+
+#review-List {
+    cursor: pointer;
+    padding: 0 3px;
+    background-color: rgba(220, 220, 220, 0.8);
+    text-align: center;
+}
+
+/* 이미지 슬라이드 시작 */
+.carousel-wrap {
+    margin: 5px auto;
+    padding: 30px 5%;
+    width: 81%;
+    position: relative;
+}
+.carousel-wrap .owl-nav {
+    position: absolute;
+    top: 0;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+}
+.carousel-wrap .owl-prev {
+    background-color: rgba(0, 0, 0, 0.1);
+    position: absolute;
+    width: 5%;
+    height: 100%;
+    cursor: pointer;
+    z-index: 2;
+}
+.carousel-wrap .owl-prev:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+    position: absolute;
+    width: 5%;
+    height: 100%;
+    cursor: pointer;
+    z-index: 2;
+}
+.carousel-wrap .owl-next {
+    background-color: rgba(0, 0, 0, 0.1);
+    position: initial;
+    position: absolute;
+    left: 95%;
+    width: 5%;
+    height: 100%;
+    cursor: pointer;
+    z-index: 2;
+}
+.carousel-wrap .owl-next:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+    position: initial;
+    position: absolute;
+    left: 95%;
+    width: 5%;
+    height: 100%;
+    cursor: pointer;
+    z-index: 2;
+}
+
+.carousel-wrap .owl-nav .owl-before {
+    position: absolute;
+    top: 41%;
+    left: 25%;
+}
+.carousel-wrap .owl-nav .owl-after {
+    position: absolute;
+    top: 41%;
+    left: 48%;
+}
+​ /* fix blank or flashing items on carousel */
+.owl-carousel .item {
+    position: relative;
+    z-index: 100;
+    -webkit-backface-visibility: hidden;
+}
+
+​ /* end fix */
+.owl-nav>div {
+    margin-top: -26px;
+    position: absolute;
+    top: 50%;
+    color: #cdcbcd;
+}
+​ .owl-nav i {
+    font-size: 52px;
+}
+​ .owl-nav .owl-prev {
+    left: -30px;
+}
+
+.owl-nav .owl-next {
+    right: -30px;
+}
+
+/*category  */
+#category_form {
+    position: sticky;
+    top:30%;
+    width: 300px;
+    float: left;
+}
+.category {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 200px;
+    background-color: #f1f1f1;
+}
+.category_div {
+    position: sticky;
+    width: 200px;
+    top: 20%;
+    left: 3%;
+    z-index: 3;
+}
+.category li {
+    display: block;
+    color: #000;
+    padding: 8px 16px;
+    text-decoration: none;
+    cursor: pointer;
+}
+.category li.active {
+    background-color: #f2745f;
+    color: white;
+}
+.category li:hover:not(.active) {
+    background-color: #f2745f;
+    color: white;
+}
+
+label.label {
+    display: inline-block;
+    margin-top: 25px;
+}

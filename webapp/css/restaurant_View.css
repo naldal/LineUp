@@ -1,0 +1,176 @@
+#a > .owl-nav, .owl-dots {
+	display: block !important;
+}
+
+#a > div.owl-stage-outer > div.owl-stage > div.owl-item.cloned.active {
+	width: 300px !important;
+}
+
+#a > div.owl-stage > div.owl-stage > div.owl-item.active {
+	width: 300px !important;
+}
+
+/* div.owl-item.cloned.active {
+	width: max-content !important;
+} */
+
+.owl-stage-outer {
+	height : 155px !important;
+}
+
+#media-right > #score {
+	margin-left: 43px !important;
+}
+
+#Restaurant_review_start > .owl-carousel .owl-dots.disabled, .owl-carousel .owl-nav.disabled {
+    display: block;
+}
+
+.container {
+    font-family: "Nanum Gothic", sans-serif;
+}
+
+#titleRst {
+    margin-left: 50px;
+    margin-top: 8px;
+    position: relative;
+}
+
+#media-right {
+    position: absolute;
+    right: 5%;
+}
+
+#fieldGp {
+    margin-top: 20px;
+    display: inline-block;
+}
+
+#columnNa {
+    width: 180px;
+}
+
+#column {
+    margin-top: 40px;
+    width: 1030px;
+}
+
+.content.is-medium {
+    line-height: 2.3em;
+}
+
+#carou1 {
+    width: 1030px;
+}
+
+#carou1 {
+    width: 730px;
+}
+
+.column.is-narrow {
+    width: 125px !important;
+}
+
+div.column.is-medium {
+    width: 968px;
+}
+
+.scrolltop {
+    display: none;
+    position: fixed;
+    right: 30px;
+    bottom: 50px;
+    z-index: 1030;
+    font-size: 1.875rem;
+    color: #868e96;
+    transition: all 0.5s ease-in-out;
+    opacity: 0.8;
+}
+.scrolltop:hover,
+.scrolltop:focus {
+    color: #dc3545;
+    transition: all 0.5s ease-in-out;
+}
+
+.carousel-wrap {
+    margin: 90px auto;
+    padding: 0 5%;
+    width: 81%;
+    position: relative;
+}
+
+/* fix blank or flashing items on carousel */
+.owl-carousel .item {
+    position: relative;
+    z-index: 100;
+    -webkit-backface-visibility: hidden;
+}
+
+/* end fix */
+.owl-nav > div {
+    margin-top: -26px;
+    position: absolute;
+    top: 50%;
+    color: #cdcbcd;
+}
+
+.owl-nav i {
+    font-size: 52px;
+}
+
+.owl-nav .owl-prev {
+    left: -30px;
+}
+
+.owl-nav .owl-next {
+    right: -30px;
+}
+
+/* header */
+#header-page {
+    margin-left: 50%;
+}
+.navbar-brand {
+    display: inline-block;
+    text-align: center;
+    float: none !important;
+}
+#main-nav {
+    left: -30% !important;
+}
+
+#reviewBtn {
+	
+	background-color:#f1c40f;
+}
+
+#basketBtn {
+	
+	background-color:#00d8d6;
+}
+
+#reservationBtn {
+	
+	background-color:#ff5e57 
+}
+
+#reviewBtn:hover{
+	transition: 0.3s;
+	transform:scale(1.08);
+}
+
+#basketBtn:hover {
+	transition: 0.3s;
+	transform:scale(1.08);
+}
+
+#reservationBtn:hover {
+	transition: 0.3s;
+	transform:scale(1.08);
+}
+
+#e{
+	font-family: Gothic A1", sans-serif !important; 
+	text-align: left !important; 
+	font-weight: bold !important;
+}

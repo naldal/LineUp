@@ -1,0 +1,63 @@
+@import url("https://fonts.googleapis.com/css?family=Rubik:300,400,500&display=swap");
+/* img {
+    width: 100px;
+    height: 100px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Rubik", sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    min-height: 100vh;
+    background-color: #222;
+} */
+
+.container_1 {
+    position: relative;
+    max-width: 100%;
+    display: grid;
+    grid-template-columns: 400px 400px 400px;
+    grid-template-rows: minmax(300px, auto);
+    margin: 40px;
+    grid-auto-flow: dense;
+    grid-gap: 50px;
+}
+
+.container_1 .box {
+    background: #f8f8ff;
+    padding: 20px;
+    display: grid;
+    font-size: 20px;
+    place-items: center;
+    text-align: center;
+    color: whitegrey;
+    transition: 0.5s;
+    margin: 0 0 24px;
+}
+.container_1 .box:hover {
+    background: #ffe2ed;
+}
+
+.container_1 .box img {
+    position: relative;
+    max-width: 100px;
+    margin-bottom: 10px;
+}
+
+@media (max-width: 791px) {
+    .container_1 {
+        grid-template-columns: repeat(auto-fill, minmax(50%, 1fr));
+        grid-template-rows: minmax(auto, auto);
+    }
+    .container_1 .box {
+        grid-column: unset !important;
+        grid-row: unset !important;
+    }
+}

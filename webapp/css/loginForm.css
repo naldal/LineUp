@@ -1,0 +1,29 @@
+.hero-body {
+	/* background-image: linear-gradient(#273c75, #2f3640); */
+}
+
+#header-page {
+    margin-left: 50%;
+}
+.navbar-brand {
+    display: inline-block;
+    text-align: center;
+    float: none !important;
+}
+#main-nav {
+    left: -30% !important;
+}
+
+body {
+    font-family: 'Rubik', sans-serif;
+}
+
+#formation {
+	margin: 0 auto;
+	width:500px;
+}
+
+label.checkbox{
+	margin-top: -23px;
+	margin-bottom: 7px;
+}

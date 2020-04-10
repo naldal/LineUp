@@ -1,0 +1,46 @@
+.hero-body {
+    height: 300px;
+}
+.hero-body .field {
+    height: 300px;
+}
+.hero-buttons {
+    height: inherit;
+    margin-top: 0;
+}
+
+.button.is-info.is-light {
+    background-color: #3dc1d3 !important;
+    color: white !important;
+    font-weight: bolder;
+    display: block;
+    width: 19%;
+    height: 100%;
+
+    transition: all ease 1s;
+}
+
+.button.is-info.is-light:hover {
+    transform: scale(1.1);
+}
+
+.button.is-info.is-light > span {
+    font-size: 20px;
+}
+
+.button.is-warning.is-light {
+    background-color: #ea8685 !important;
+    color: white !important;
+    width: 19%;
+    height: 100%;
+    font-weight: bolder;
+    transition: all ease 1s;
+}
+
+.button.is-warning.is-light:hover {
+    transform: scale(1.1);
+}
+
+.button.is-warning.is-light > span {
+    font-size: 20px;
+}

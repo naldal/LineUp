@@ -1,0 +1,44 @@
+@charset "UTF-8";
+
+nav.navbar {
+	margin-top:40px;
+}
+
+section.hero.is-primary {
+	margin-top:-32px;
+	margin-bottom: 60px;
+}
+
+section {
+	margin-bottom : 40px;
+}
+
+
+table {
+	margin : auto;
+	text-align : center;
+	margin-bottom: 40px;
+	font-family: 'Gothic A1', sans-serif;
+}
+
+tr> td {
+	text-align : center !important;
+	vertical-align: middle !important;
+}
+
+tr> th {
+	text-align : center !important;
+	vertical-align: middle !important;
+}
+
+.기업회원  {
+	background-color: rgba(52, 231, 228, 0.1);
+}
+
+.개인회원 {
+	background-color: rgba(248, 165, 194,0.06)
+}
+
+
+
+

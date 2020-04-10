@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="indexSQL">
+
+	<select id="indexReviewList" resultType="index">
+		<![CDATA[
+		select distinct rev.seq_restaurant,rev.seq_member, mem.nickname, rev.subject, rev.content, res.restaurant_name, img.main_img, rev.log_time
+		from review rev
+		join member mem 
+		on mem.seq_member = rev.seq_member
+		join restaurant res
+		on res.seq_restaurant = rev.seq_restaurant
+		join restaurant_regi_img img
+		on res.seq_restaurant = img.seq_restaurant
+		order by rev.log_time desc
+	]]>
+
+	</select>
+</mapper>

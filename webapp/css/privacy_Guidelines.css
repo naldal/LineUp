@@ -1,0 +1,21 @@
+@charset "UTF-8";
+
+body{
+	overflow-x: initial !important; 
+}
+#Privacy_Policy_List{
+	float: left;
+	margin-right: 10px;
+	position: sticky;
+	top: 70px;
+}
+#Privacy_Policy_List li{
+	padding:10px;
+	cursor:pointer;
+}
+#Privacy_Policy_List li:hover{
+	font-weight: bold;
+}
+#pre_div pre{
+ white-space: pre-line;
+}

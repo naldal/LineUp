@@ -1,0 +1,63 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: "Poppins", sans-serif;
+}
+
+fieldset {
+    margin: 32 25 25 auto !important;
+    width: 250px !important;
+}
+
+fieldset button {
+    margin-left: 3.5px !important;
+    margin-top: -14px !important;
+}
+
+#section-hero {
+    position: relative;
+    padding: 20px;
+
+    margin-top: 60px;
+    margin-right: 3%;
+    margin-left: 15%;
+    width: 32%;
+    height: 250px;
+    float: left;
+}
+#section-hero-content {
+    left: 50%;
+    text-align: left;
+}
+
+#nep {
+    float: left;
+}
+
+#ms {
+    float: left;
+    margin-left: 10;
+    width: 280px;
+    height: 250px;
+}
+
+.button.is-danger {
+    position: relative;
+    margin-left: 0;
+    width: 255px;
+}
+
+#section-heading {
+    padding: 20px;
+    margin-left: 3%;
+    width: 32%;
+    margin-right: 15%;
+    margin-top: 60px;
+    margin-bottom: 100px;
+    height: 250px;
+    float: right;
+}
+
+.map {
+    margin-bottom: 100px;
+}

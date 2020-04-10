@@ -1,0 +1,237 @@
+@charset "UTF-8";
+
+#restaurang-info {
+    padding-left: 10%;
+}
+#restaurang-info input,
+#restaurang-info a {
+    height: 40px;
+}
+#restaurang-info #restaurang-name,
+#restaurang-info #user-name,
+#restaurang-info #num {
+    width: 15%;
+}
+#restaurang-info #restaurang-addr {
+    width: 70%;
+}
+#restaurang-info #tel {
+    width: 40%;
+}
+
+/* header */
+#header-page {
+    margin-left: 50%;
+}
+.navbar-brand {
+    display: inline-block;
+    text-align: center;
+    float: none !important;
+}
+#main-nav {
+    left: -30% !important;
+}
+
+#menupan-table {
+    width: 300px;
+}
+
+#menupan-table .table {
+    margin: 0 auto;
+    width: 228px;
+}
+
+#menupan-table .table th {
+    width: 50%;
+    text-align: center;
+}
+
+.icon.has-text-success {
+    margin-left: 40%;
+}
+
+#subimg {
+    display: block;
+}
+
+#subimg .file-label {
+    margin-top: 5px;
+}
+
+#date-form img {
+    margin-top: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+#date-form #date {
+    float: left;
+    width: 140px;
+    text-align: center;
+}
+
+.message-header {
+    margin-top: 5px;
+}
+
+.message-header table {
+    width: 100%;
+    color: white;
+}
+
+.message-header table td {
+    text-align: center;
+    width: 25%;
+}
+
+#users {
+    background-color: gray;
+    border-radius: 0;
+}
+
+/* 리뷰 테이블 관리 */
+.review-table {
+    width: 100%;
+}
+.review-table tr {
+    line-height: 2;
+}
+
+/* 예약관리 펼치기 접기 -시작  */
+#Reservation-Management {
+    max-height: 50px;
+    overflow: hidden;
+}
+
+#Reservation-List {
+    margin-top: 5px;
+    cursor: pointer;
+    padding: 0 3px;
+    background-color: rgba(220, 220, 220, 0.8);
+    text-align: center;
+}
+
+/* 예약관리 대기 시작 버튼*/
+
+/* 레스토랑 리뷰 글내용 펼치기 접기 -시작  */
+#content {
+    max-height: 150px;
+    overflow: hidden;
+    padding: 10px 10px;
+}
+
+.review-content {
+    cursor: pointer;
+    padding: 0 3px;
+    background-color: rgba(220, 220, 220, 0.8);
+    text-align: center;
+}
+
+/* 레스토랑  리뷰 리스트 펼치기 및 접기  -시작  */
+#my-restaurang-review-list {
+    overflow: hidden;
+    padding: 5px;
+    max-height: 435px;
+}
+
+#review-List {
+    cursor: pointer;
+    padding: 0 3px;
+    background-color: rgba(220, 220, 220, 0.8);
+    text-align: center;
+}
+
+/*category  */
+.category {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 200px;
+    background-color: #f1f1f1;
+}
+.category_div {
+    position: fixed;
+    top: 20%;
+    right: 3%;
+    z-index: 3;
+}
+.category li {
+    display: block;
+    color: #000;
+    padding: 8px 16px;
+    text-decoration: none;
+    cursor: pointer;
+}
+/* .category li.active {
+    background-color: #f2745f;
+    color: white;
+} */
+.category li:hover:not(.active) {
+    background-color: #f2745f;
+    color: white;
+}
+
+.scrolltop {
+    display: none;
+    position: fixed;
+    right: 30px;
+    bottom: 50px;
+    z-index: 1030;
+    font-size: 1.875rem;
+    color: #868e96;
+    transition: all 0.5s ease-in-out;
+    opacity: 0.8;
+}
+.scrolltop:hover,
+.scrolltop:focus {
+    color: #dc3545;
+    transition: all 0.5s ease-in-out;
+}
+
+.carousel-wrap {
+    margin: 90px auto;
+    padding: 0 5%;
+    width: 81%;
+    position: relative;
+}
+
+/* fix blank or flashing items on carousel */
+.owl-carousel .item {
+    position: relative;
+    z-index: 100;
+    -webkit-backface-visibility: hidden;
+}
+
+/* end fix */
+.owl-nav > div {
+    margin-top: -26px;
+    position: absolute;
+    top: 50%;
+    color: #cdcbcd;
+}
+
+.owl-nav i {
+    font-size: 52px;
+}
+
+.owl-nav .owl-prev {
+    left: -30px;
+}
+
+.owl-nav .owl-next {
+    right: -30px;
+}
+
+/* header */
+#header-page {
+    margin-left: 50%;
+}
+.navbar-brand {
+    display: inline-block;
+    text-align: center;
+    float: none !important;
+}
+#main-nav {
+    left: -30% !important;
+}

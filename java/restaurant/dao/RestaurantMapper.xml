@@ -1,0 +1,477 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+						 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="restaurantSQL">
+
+	<select id="getStoreInformationManagement_info"
+		parameterType="String" resultType="restaurant.bean.RestaurantDTO">
+		select * from restaurant where
+		company_num = #{company_num}
+	</select>
+
+	<select id="getStoreInformationManagement_menu"
+		parameterType="int" resultType="restaurant.bean.RestaurantMenuDTO">
+		select * from restaurant_menu where
+		seq_restaurant=#{seq_restaurant}
+	</select>
+
+	<select id="getStoreInformationManagement_reservation"	parameterType="java.util.Map"	resultType="reservation.bean.ReservationDTO">
+		select case
+			when mem.real_name is not null
+				then mem.real_name
+			when mem.real_name is null 
+				then mem.nickname
+		end name, reserve.howmany, mem.tel,
+		to_char(reserve.log_time, 'HH24:mI') log_time
+			from member mem 
+			join reservation reserve 
+			on
+			reserve.seq_member = mem.seq_member 
+			and	TO_date(reserve.log_time, 'YY/MM/DD') = #{date}
+			and seq_restaurant = #{seq_restaurant} order by reserve.log_time desc
+	</select>
+
+	<select id="getStoreInformationManagement_reviewList"
+		parameterType="int" resultType="restaurant.bean.RestaurantReviewDTO">
+		select case
+		when mem.real_name is not
+		null then mem.real_name
+		when mem.real_name is null then mem.nickname
+		end name, mem.id, review.subject, review.score, review.content, review.seq_review
+		from
+		review join member mem on review.seq_member = mem.seq_member and
+		seq_restaurant=#{seq_restaurant} order by review.log_time desc
+	</select>
+
+	<select id="getRestaurantSeq" parameterType="String"
+		resultType="String">
+		select seq_restaurant from restaurant where company_num = #{company_num}
+	</select>
+
+	<select id="getRestaurantInfo" parameterType="String"
+		resultType="restaurant">
+		select * from restaurant where company_num = #{company_num}
+	</select>
+
+	<select id="restaurantDelete" parameterType="String"
+		resultType="String">
+		begin
+			
+			update member set store_exist=null 
+			where seq_member=(select seq_member from restaurant 
+			where seq_restaurant=#{restaurant_seq});
+			
+			delete from restaurant where seq_restaurant =
+			#{restaurant_seq};
+			
+		end;
+	</select>
+
+	<update id="restaurantUpdate" parameterType="java.util.Map">
+		update restaurant set restaurant_name =	#{restaurant_name}, zipcode=#{zipcode}, addr=#{addr}, tel=#{tel} , category=#{cateroty} where seq_restaurant = #{seq_restaurant}
+	</update>
+
+	<delete id="restaurantMenuDelete" parameterType="String">
+		delete
+		restaurant_menu where seq_restaurant = #{seq_restaurant}
+	</delete>
+
+	<insert id="restaurantMenuUpdate" parameterType="java.util.List">
+		INSERT All
+		<foreach collection="list" item="item"	close="select 1 from dual">
+			INTO
+			restaurant_menu
+			(seq_restaurant, menu_name, menu_price,	vegan, spicy)
+			VALUES (#{item.seq_restaurant}, #{item.menu_name},#{item.menu_price},#{item.vegan}, #{item.spicy})
+		</foreach>
+	</insert>
+
+	<insert id="restaurant_register_info" parameterType="restaurant">
+		begin
+			insert into
+			restaurant
+			values(RESTAURANT_SEQ.nextval, 
+				 #{restaurant_name}, 
+				 #{real_name}, 
+				 #{zipcode}, 
+				 #{addr},
+				 #{tel}, 
+				 #{company_num}, 
+				 #{category}, 
+				 sysdate, 
+				 null, 
+				 #{seq_member},
+				 #{content}, 
+				 '0');
+			
+			update member set store_exist='1' where seq_member=#{seq_member};
+		end;
+	</insert>
+
+	<insert id="restaurant_register_imgs" parameterType="image">
+		insert into
+		restaurant_regi_img
+		values(IMAGES_SEQ.nextval, #{seq_restaurant}, #{main_img}, #{sub_img})
+	</insert>
+
+	<select id="getResSeq" parameterType="String" resultType="int">
+		select seq_restaurant from restaurant where company_num = #{company_num}
+	</select>
+
+	<insert id="restaurantRegister" parameterType="java.util.List">
+		insert All
+		<foreach collection="list" item="item" index="index" close="SELECT 1 from dual">
+			into restaurant_menu(seq_restaurant, menu_name, menu_price,	vegan, spicy) 
+			values( #{item.seq_restaurant}, #{item.menu_name}, #{item.menu_price}, #{item.vegan}, #{item.spicy}	)
+		</foreach>
+	</insert>
+
+	<!--List & Paging & Search====================================================  -->
+	<select id="restaurantHomeList" resultType="restaurantList">
+		SELECT  distinct res.seq_restaurant, company_num, res.seq_member,
+            res.seq_member,
+            img.main_img,
+		    res.category,
+		    addr,
+            zipcode,
+		    res.restaurant_name,
+            res.total_score
+        FROM restaurant res 
+            join restaurant_regi_img img
+            on res.seq_restaurant = img.seq_restaurant
+	</select>
+	
+	<select id="restaurantList"  resultType="restaurantList" parameterType="java.util.Map">
+		
+		<![CDATA[
+		select * from
+		(select rownum rn, tt.* from
+		(select distinct    res.restaurant_name, 
+		    img.main_img,
+		    res.category,
+		    addr,
+		    tel, 
+		    zipcode, 
+		    res.total_score score,
+		    res.seq_member,
+		    res.company_num, 
+		    res.seq_restaurant
+		from restaurant res
+		join restaurant_regi_img img
+		on res.seq_restaurant = img.seq_restaurant)tt
+		)where rn>=#{startNum} and rn<=#{endNum} 
+		]]>
+	</select>
+		
+	<select id="restaurantImgList"  resultType="image">
+		select main_img from restaurant_regi_img
+	</select>
+
+	<select id="getRestaurantTotalA" resultType="int">
+		select count(*) from	
+		(select distinct    res.restaurant_name, 
+		    img.main_img,
+		    res.category,
+		    addr,
+		     tel, 
+		    zipcode, 
+		    res.total_score,
+		    res.seq_member,
+		    res.company_num, 
+		    res.seq_restaurant
+		from restaurant res
+		join restaurant_regi_img img
+		on res.seq_restaurant = img.seq_restaurant)
+	</select>
+
+	<insert id="reservation" parameterType="java.util.Map">
+		insert into reservation values(
+			RESERVATION_SEQ.nextval, 
+			(select seq_member from member where id=#{id}),
+			#{seq_restaurant},
+			#{howmany},
+			sysdate+9/24)
+	</insert>
+	
+	<delete id="reservation2" parameterType="java.util.Map">
+		delete from basket 
+			where seq_member=(select seq_member from member where id=#{id}) 
+			and seq_restaurant=#{seq_restaurant}
+	</delete>
+	
+	<update id="reservation3" parameterType="java.util.Map">
+		update member set reservation='1' where id=#{id}
+	</update>
+	
+	<delete id="cancelReservation" parameterType="java.util.Map">
+		delete reservation where seq_restaurant=#{seq_restaurant} and seq_member=(select seq_member from member where id=#{id})
+	</delete>
+	
+	<update id="cancelReservation2" parameterType="java.util.Map">
+		update member set reservation='0' where id=#{id}
+	</update>
+
+	<select id="getRestaurantAllInfo" parameterType="String"
+		resultType="restaurant">
+		select * from restaurant where seq_restaurant = #{restaurant_seq}
+	</select>
+
+<!-- 그냥 레스토랑 뷰값 (메뉴, 이미지 제외) -->
+
+	<select id= "restaurantInfo" parameterType="String" resultType="info">
+	   select seq_restaurant, restaurant_name, category, addr, tel, seq_member, content from restaurant where seq_restaurant = #{seq_restaurant}
+	</select>
+
+	<select id="getStarValue" parameterType="String" resultType="int">
+		select avg(score)
+		from review
+		where seq_restaurant = #{seq_restaurant}
+	</select>
+
+	  <select id="restaurantSearchList" resultType="restaurantList" parameterType="java.util.Map">
+		<if test="vegan == 'veganNo'">
+		<![CDATA[
+		select * from
+		(select rownum rn, tt.* from
+		(select distinct    res.restaurant_name, 
+		    img.main_img,
+		    res.category,
+		    addr,
+		     tel, 
+		    zipcode, 
+		    res.total_score score,
+		    res.seq_member,
+		    res.company_num, 
+		    res.seq_restaurant
+		from restaurant res
+		join restaurant_regi_img img
+		on res.seq_restaurant = img.seq_restaurant
+		
+		where ${searchOption} like '%'||#{searchText}||'%'
+		)tt
+		)where rn>=#{startNum} and rn<=#{endNum} 
+		]]>
+		</if>
+		<if test="vegan == 'veganYes'">
+		<![CDATA[
+		select * from
+		(select rownum rn, tt.* from
+		(select distinct    res.restaurant_name, 
+		    img.main_img,
+		    res.category,
+		    addr,
+		     tel, 
+		    zipcode, 
+		    res.total_score score,
+		    res.seq_member,
+		    res.company_num, 
+		    res.seq_restaurant
+		from restaurant res
+		join restaurant_regi_img img
+		on res.seq_restaurant = img.seq_restaurant
+		join restaurant_menu menu
+        on menu.seq_restaurant=res.seq_restaurant
+		where ${searchOption} like '%'||#{searchText}||'%'
+		and vegan like '%true%'
+		)tt
+		)where rn>=#{startNum} and rn<=#{endNum} 
+		]]>
+		</if>
+		
+		</select>  
+	
+	<select id="getRestaurantSearchTotalA" resultType="int" parameterType="java.util.Map">
+		select count(*) from (select distinct    res.restaurant_name, 
+		    img.main_img,
+		    res.category,
+		    addr, 
+		    zipcode, 
+		    res.total_score,
+		    res.seq_member,
+		    res.company_num, 
+		    res.seq_restaurant
+		from restaurant res
+		join restaurant_regi_img img
+		on res.seq_restaurant = img.seq_restaurant) 
+		where ${searchOption} like '%'||#{searchText}||'%' 
+		
+		<if test="vegan== veganYes">
+		select distinct    res.restaurant_name, 
+		    img.main_img,
+		    res.category,
+		    addr, 
+		    zipcode, 
+		    res.total_score,
+		    res.seq_member,
+		    res.company_num, 
+		    res.seq_restaurant
+		from restaurant res
+		join restaurant_regi_img img
+		on res.seq_restaurant = img.seq_restaurant
+		join restaurant_menu menu
+        on menu.seq_restaurant=res.seq_restaurant
+        where vegan like '%true%'
+		</if>
+	</select>
+
+	
+	<select id="getStoreInformationManagement_image" parameterType="int" resultType="restaurant.bean.RestaurantImageDTO">
+		select * from restaurant_regi_img where seq_restaurant = #{seq_restaurant}
+	</select>
+	
+	<!-- Restaurant Detail Page -->
+	<select id="getResSeqWithMemberSeq" parameterType="int" resultType="String">
+		select seq_restaurant from restaurant where seq_member = #{seq_member}
+	</select>
+	
+	<select id="restaurantMenu" parameterType="String" resultType="menu">
+		select * from restaurant_menu where seq_restaurant = #{seq_restaurant}
+	</select>
+	
+	<select id="restaurantImage" parameterType="String" resultType="image">
+		select * from restaurant_regi_img where seq_restaurant = #{seq_restaurant}
+	</select>
+	
+	<select id="restaurantReview" parameterType="String" resultType="withname">
+		select r.seq_review, r.seq_member, r.subject, r.content, r.score, r.log_time, m.real_name, m.nickname, m.id
+		from review r
+		inner join member m
+		on
+		r.seq_member  = m.seq_member
+		where r.seq_restaurant = #{seq_restaurant}
+		order by log_time desc
+	</select>
+	
+	<select id="verifyResOwner" parameterType="String" resultType="owner">
+		select r.seq_member, m.company_num, r.seq_restaurant
+		from restaurant r
+		inner join member m
+		on
+		r.company_num = m.company_num
+		where seq_restaurant = #{seq_restaurant}
+	</select>
+
+	<insert id="getIntoBasket" parameterType="java.util.Map">
+		insert into basket values (basket_seq.nextval, #{seq_restaurant}, #{seq_member}, sysdate)
+	</insert>
+
+	<insert id="restaurantImageInsert" parameterType="restaurant.bean.RestaurantImageDTO">
+		INSERT INTO restaurant_regi_img (seq_regi, seq_restaurant, main_img, sub_img) VALUES (images_seq.nextval, #{seq_restaurant}, #{main_img}, #{sub_img})
+	</insert>	
+
+	<insert id="reviewRegister" parameterType="review">
+	begin
+		insert into review values 
+		(review_seq.nextval, #{seq_member}, #{subject}, #{content}, #{score}, sysdate, #{seq_restaurant}, #{name}, #{id});
+
+		update restaurant set total_score = total_score+#{score} where seq_restaurant=#{seq_restaurant};
+	end;
+	</insert>
+
+	<insert id="reviewImgRegister" parameterType="reviewImg">
+	begin
+		insert into review_img values (review_img_seq.nextval, #{seq_member}, #{seq_restaurant}, #{image}, #{seq_review});
+		update reserved_restaurant set seq_review=#{seq_review} where seq_member=#{seq_member} and seq_restaurant=#{seq_restaurant};
+
+	end;
+	</insert>
+	
+	<select id="getReviewSeq" parameterType="int" resultType="int">
+		select seq_review from 
+		(select seq_review, seq_member, log_time 
+		from review 
+		order by log_time desc)
+		where seq_member=#{seq_member} and rownum=1
+	</select>
+	
+	<select id="getRestaurantReviewImage" parameterType="String" resultType="reviewImg">
+		select * from review_img where seq_restaurant = #{seq_restaurant}
+	</select>
+	
+	<select id="hasRestaurant" parameterType="String" resultType="String">
+		select r.seq_member
+		from member m
+		inner join restaurant r
+		on
+		r.seq_member = m.seq_member
+		where id = #{id}
+	</select>
+	
+	<select id="visitCheckYes1" parameterType="java.util.Map" resultType="reserved">
+		select seq_reservation, seq_member, seq_restaurant, howmany, to_char(log_time, 'YY/MM/DD') log_time
+		from reservation 
+		where seq_restaurant= #{seq_restaurant} and seq_member = (select seq_member from member where tel = #{tel} and (real_name=#{name} or nickname=#{name}))
+	</select>
+	
+	<delete id="visitCheckYes2" parameterType="java.util.Map">
+		delete reservation 
+		where seq_restaurant = #{seq_restaurant} 
+		and seq_member=(select seq_member from member where tel=#{tel} and (real_name=#{name} or nickname=#{name}))
+	</delete>
+	
+	<insert id="visitCheckYes3" parameterType="reserved">
+	begin 
+		insert into reserved_restaurant values
+		(reserved_restaurant_seq.nextval, 
+		   #{seq_member},
+		   #{seq_restaurant},
+		   null,
+		   #{seq_reservation},
+		   #{howmany},
+		   #{log_time},
+		   sysdate,
+		   '1');
+		
+		update member set reservation='0' where seq_member=#{seq_member};					   
+	end;
+	</insert>
+	
+	<delete id="visitCheckNo" parameterType="java.util.Map">
+	begin
+		delete reservation where seq_restaurant=#{seq_restaurant} and seq_member=(select seq_member from member where tel=#{tel} and (real_name=#{name} or nickname=#{name}));
+	
+		update member set reservation='0' where seq_member=(select seq_member from member where tel=#{tel} and (real_name=#{name} or nickname=#{name}));			
+	end;
+	</delete>
+	
+
+	<select id="reservationCheck" parameterType="java.util.Map" resultType="member">
+		select * from member where id=#{id}
+	</select>
+
+	<select id="getReservedRestaurantList"	parameterType="java.util.Map"	resultType="reservation.bean.ReservationDTO">
+		select case
+		when mem.real_name is not
+		null then mem.real_name
+		when mem.real_name is null then mem.nickname
+		end name, reserve.howmany, mem.tel,to_char(reserve.log_time, 'HH24:mI') log_time, to_char(reserve.visiting_time, 'HH24:mI') visiting_time , reserve.accepted	
+	    from member mem join reserved_restaurant reserve on reserve.seq_member = mem.seq_member 
+	    and	TO_date(reserve.log_time, 'YY/MM/DD') = #{date} and seq_restaurant=#{seq_restaurant} order by reserve.log_time desc
+	</select>
+
+	<select id="restaurantScoreCount" parameterType="String" resultType="int">
+		select count(*) from review where seq_restaurant=#{seq_restaurant}
+	</select>
+
+	<select id="getRestaurantMainIMAGE" parameterType="String" resultType="String">
+		select main_img from (select seq_restaurant, main_img, sub_img from restaurant_regi_img where seq_restaurant=#{seq_restaurant} order by restaurant_regi_img.SEQ_REGI desc) where rownum=1
+	</select>
+	
+	<delete id="deleteRestaurantIMAGE" parameterType="String">
+		delete from restaurant_regi_img where seq_restaurant = #{seq_restaurant}
+	</delete>
+
+<!-- 	<insert id="doReserve">
+		insert into reservation values (reservation_seq.nextval,  #{seq_member}, #{seq_restaurant}, #{howmany}, sysdate)
+	</insert> -->
+
+	<select id="acceptCheck">
+		select accepted from reserved_restaurant where seq_member = #{seq_member} and seq_restaurant = #{seq_restaurant}
+	</select>
+	
+	<update id="reservation4" parameterType="java.util.Map">
+		update reserved_restaurant set accepted = '0' where seq_restaurant = #{seq_restaurant} and seq_member  = (select seq_member from member where id = #{id})
+	</update>
+	
+</mapper>

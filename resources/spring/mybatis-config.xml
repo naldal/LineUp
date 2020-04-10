@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"  
+									"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<typeAliases>
+		<typeAlias type="member.bean.MemberDTO" alias="member"/>
+		
+		<typeAlias alias="restaurant" type="restaurant.bean.RestaurantDTO"/>
+		
+		<typeAlias type="index.bean.IndexReviewDTO" alias="index"/>
+		
+		<typeAlias type="qna.bean.QnaDTO" alias="qna"/>
+		
+		<typeAlias type="restaurant.bean.RestaurantImageDTO" alias="image"/>
+		
+		<typeAlias type="restaurant.bean.RestaurantMenuDTO" alias="menu"/>
+	
+		<typeAlias type="restaurant.bean.RestaurantReviewDTO" alias="review"/>
+		
+		<typeAlias type="restaurant.bean.RestaurantReviewImageDTO" alias="reviewImage"/>
+		
+		<typeAlias type="restaurant.bean.RestaurantListDTO" alias="restaurantList"/>
+		
+		<typeAlias type="restaurant.bean.RestaurantInfoDTO" alias="info"/>
+		
+		<typeAlias type="restaurant.bean.RestaurantReviewDTOWithName" alias="withname"/>
+		
+		<typeAlias type="restaurant.bean.RestaurantOwnerDTO" alias="owner"/>
+		
+		<typeAlias type="restaurant.bean.RestaurantReviewImageDTO" alias="reviewImg"/>
+		
+		<typeAlias type="restaurant.bean.RestaurantReserved" alias="reserved"/>
+	</typeAliases>
+
+</configuration>
+	

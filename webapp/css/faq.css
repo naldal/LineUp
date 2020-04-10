@@ -1,0 +1,106 @@
+@charset "UTF-8";
+
+* {
+    font-family: "Rubik", sans-serif;
+}
+
+h2.subtitle {
+    margin-top: 1;
+    font-family: "Rubik", sans-serif;
+}
+
+.icon_title {
+    margin-left: 55px !important;
+}
+
+.icon_img {
+    margin-left: 55px !important;
+}
+
+.notification {
+    background-color: ffffff !important;
+}
+
+.box {
+    cursor: pointer !important;
+    margin-bottom: 0.5rem !important;
+}
+
+p.title.icon_title {
+    margin-right: 60px;
+    font-size: 29px;
+    color: black;
+    font-family: "Do Hyeon", sans-serif;
+}
+
+article > p.title {
+    margin-right: 20px;
+    text-align: center;
+    font-size: 29px;
+    /* font-weight: lighter; */
+    color: black !important;
+    font-family: "Do Hyeon", sans-serif;
+}
+
+.ques_p {
+    padding-top: 0 !important;
+}
+
+.ques_span {
+    display: inline-block;
+    margin-top: 7px;
+}
+
+input[id*="answer"] {
+    display: none;
+}
+
+input[id*="answer"] + label {
+    display: block;
+    padding: 20px;
+    border: 1px solid #000000;
+    border-bottom: 0;
+    color: #fff;
+    font-weight: 900;
+    background: #555;
+    cursor: pointer;
+    position: relative;
+    font-family: "Nanum Gothic", sans-serif;
+}
+
+input[id*="answer"] + label em {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    width: 30px;
+    height: 30px;
+    margin-top: -15px;
+    display: inline-block;
+    background: url("../img/arrow.png") 0 0 no-repeat;
+}
+
+input[id*="answer"] + label + div {
+    max-height: 0;
+    transition: all 0.35s;
+    overflow: hidden;
+    background: #999;
+    font-size: 15px;
+    font-family: "Nanum Gothic", sans-serif;
+}
+
+input[id*="answer"] + label + div p {
+    display: inline-block;
+    padding: 20px;
+}
+
+input[id*="answer"]:checked + label + div {
+    max-height: 1000px;
+}
+
+input[id*="answer"]:checked + label em {
+    background-position: 0 -30px;
+}
+
+div[id*="bbox"] {
+    cursor: pointer;
+}

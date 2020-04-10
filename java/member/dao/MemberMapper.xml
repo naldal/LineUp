@@ -1,0 +1,269 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+						 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+						 
+<mapper namespace="memberSQL">
+
+<insert id="enter_register" parameterType="member">
+	insert into member (seq_member, real_name, id, pwd, tel, company_num, position, log_time)
+				values (member_seq.nextval, #{real_name}, #{id}, #{pwd}, #{tel}, #{company_num}, 'ENTERPRISE', sysdate)
+</insert>
+
+<insert id="individual_register" parameterType="member">
+	insert into member (seq_member, nickname, id, pwd, tel, position, log_time)
+				values (member_seq.nextval, #{nickname}, #{id}, #{pwd}, #{tel}, 'INDIVIDUAL', sysdate)
+</insert>
+	
+<select id="login" parameterType="String" resultType="member">
+	select * from member where id = #{id}
+</select>
+
+
+<select id="loginCheck" resultType="member">
+	select * from member where id = #{id}
+</select>
+
+<select id="loginCheckIndi" parameterType="String" resultType="member">
+	select * from member where nickname = #{nickname}
+</select>
+
+<!-- 개인회원 정보수정 -->
+<update id="userModify" parameterType="java.util.Map">
+	update member set tel=#{tel}, pwd=#{pwd} where id=#{id}
+</update>
+
+<!-- 회원 DTO 가져오기 -->
+<select id="getUser" parameterType="String" resultType="member">
+	select * from member where id=#{id}
+</select>
+
+<!--Mail authentication  -->	
+
+	<update id="verifyMember" parameterType="String">
+		update member set authStatus=1 where id=#{id} 
+	</update>
+	
+	
+<delete id="deleteMember" parameterType="String">
+	delete member where id = #{id}
+</delete>
+
+
+<select id="getBasketList" parameterType="String" resultType="restaurant">
+	select r.SEQ_RESTAURANT, r.RESTAURANT_NAME, r.CATEGORY, r.ADDR, b.seq_basket
+	from restaurant r
+	join basket b on(r.seq_restaurant = b.seq_restaurant)
+	join member m on(b.seq_member = m.seq_member)
+	where r.seq_restaurant in(select seq_restaurant from basket) and b.seq_member=(select seq_member from member where id=#{id})
+	order by b.seq_basket desc
+</select>
+
+<select id="getQnaList" parameterType="String" resultType="qna">
+	select * from qna 
+	where seq_member=(select seq_member from member 
+	where id=#{id})
+	order by log_time desc
+</select>
+
+<select id="getReviewList" parameterType="String" resultType="review">
+	select seq_review, review.seq_member, review.subject, review.content, review.score, review.log_time, seq_restaurant, name, id, restaurant_name from review review
+    join restaurant res using (seq_restaurant)
+	where review.seq_member=(select seq_member from member m 
+	where id=#{id})
+	order by log_time desc
+</select>
+
+<select id="getMyReservation" parameterType="String" resultType="restaurant">
+	select * from restaurant 
+	where seq_restaurant=(select seq_restaurant from reservation 
+	where seq_member=(select seq_member from member 
+	where id=#{id}))
+	
+	<!-- select seq_restaurant, restaurant_name, real_name, zipcode, addr, tel, company_num, category, log_time, book_time, seq_member, content, 
+	round(total_score/(select count(*) from review 
+	where seq_member=(select seq_member from member where id=#{id}))) as score
+	from restaurant where seq_restaurant=(select seq_restaurant from reservation where seq_member=(select seq_member from member where id=#{id})) -->
+</select>
+
+<insert id="qnaWrite" parameterType="qna.bean.QnaDTO">
+	insert into qna (seq_qna, category_qna, seq_member, subject_qna, content_qna, img, log_time, status,secret,member_id) values(qna_seq.nextval, #{category_qna},#{seq_member},#{subject_qna},#{content_qna},#{img},sysdate,0,#{secret},#{member_id})
+</insert>
+
+<select id="getVisitedList" parameterType="String" resultType="restaurant.bean.RestaurantVisitedDTO">
+	select * from restaurant restaurant
+	join reserved_restaurant visited using(seq_restaurant)
+	where visited.seq_member=(select seq_member from member where id=#{id})
+	order by visited.seq_visited desc
+	
+	<!-- select seq_restaurant, restaurant_name, real_name, zipcode, addr, tel, company_num, res.category, res.log_time, res.book_time, res.seq_member, content, 
+	round(total_score/(select count(*) from review review
+	where seq_member=(select seq_member from member where id=#{id}))) as score, seq_review
+    from restaurant res
+	join reserved_restaurant visited using(seq_restaurant)
+	where visited.seq_member=(select seq_member from member where id=#{id})
+	order by visited.seq_visited desc -->
+</select>
+
+<insert id="reviewWrite" parameterType="review">
+	begin
+		insert into review(seq_review, seq_member, subject, content, score, log_time, seq_restaurant, name, id) 
+		values(review_seq.nextval, #{seq_member}, #{subject}, #{content}, #{score}, sysdate, #{seq_restaurant}, #{name}, #{id});
+		
+		update restaurant set total_score = total_score+#{score} where seq_restaurant=#{seq_restaurant};
+	end;
+</insert>
+
+<insert id="reviewImageWrite" parameterType="reviewImage">
+	begin
+	
+	insert into review_img values(review_img_seq.nextval, #{seq_member}, #{seq_restaurant}, #{image}, #{seq_review});
+	update reserved_restaurant set seq_review=#{seq_review} where seq_member=#{seq_member} and seq_restaurant=#{seq_restaurant};
+	
+	end;
+</insert>
+
+<select id="getReviewImageList" parameterType="String" resultType="reviewImage">
+	select * from review_img where seq_member=(select seq_member from member where id=#{id})
+</select>
+
+<select id="getQnaFormList" parameterType="java.util.Map" resultType="qna.bean.QnaDTO">
+	
+<if test='memSEQ==null'>
+<![CDATA[select * from (select rownum rn, tt.* from
+       			(select seq_qna, category_qna, seq_member, subject_qna, content_qna, img, to_char(log_time,'YYYY-MM-DD')as log_time, status, secret, member_id from qna where secret=0 order by seq_qna desc )tt
+			  )where rn >= #{startNum} and rn <= #{endNum}]]>
+</if>               
+ 
+<if test='memSEQ!=null and position=="ADMIN"'>
+<![CDATA[select * from (select rownum rn, tt.* from
+    			(select seq_qna, category_qna, seq_member, subject_qna, content_qna, img, to_char(log_time,'YYYY-MM-DD')as log_time, status, secret, member_id from qna order by seq_qna desc  )tt
+			  )where rn >= #{startNum} and rn <= #{endNum}]]>
+</if>
+
+<if test='memSEQ!=null and position!="ADMIN"'>
+<![CDATA[select * from (select rownum rn, tt.* from
+    			(select seq_qna, category_qna, seq_member, subject_qna, content_qna, img, to_char(log_time,'YYYY-MM-DD')as log_time, status, secret, member_id from qna where secret=0 or seq_member=#{memSEQ} and secret=1 order by seq_qna desc  )tt
+			  )where rn >= #{startNum} and rn <= #{endNum}]]>
+</if>  
+          
+</select>
+
+<select id="getListCnt" parameterType="java.util.Map" resultType="int">
+	 select count(*) from qna where secret=0
+	 	<if test='memSEQ!=null'>
+	 		or seq_member=#{memSEQ} and secret=1
+	 	</if>
+</select>
+
+<select id="getQnaView" parameterType="int" resultType="qna.bean.QnaDTO">
+	 select * from qna where seq_qna=#{seq}
+</select>
+
+<delete id="qnaDelete" parameterType="int">
+	 delete from qna where seq_qna=#{seq}
+</delete>
+
+<update id="qnaUpdate" parameterType="java.util.Map">
+	 update qna set reply=#{reply},status=1 where seq_qna=#{seq}
+</update>
+
+<select id="getReviewSeq" parameterType="int" resultType="int">
+	select seq_review from 
+	(select seq_review, seq_member, log_time 
+	from review 
+	order by log_time desc)
+	where seq_member=#{seq_member} and rownum=1
+</select>
+
+
+<select id="searchQnaList" parameterType="java.util.Map" resultType="qna.bean.QnaDTO">
+ 	
+	<if test='memSEQ==null'>
+	select * from (select rownum rn, tt.* from
+	       			(select seq_qna, category_qna, seq_member, subject_qna, content_qna, img, to_char(log_time,'YYYY-MM-DD')as log_time, status, secret, member_id from qna where secret=0 
+	       			 <if test='category=="subject/content"' >
+	       			 	and subject_qna like '%'||#{search}||'%' or content_qna like '%'||#{search}||'%' 
+	       			 </if>
+	       			 <if test='category=="subject"' >
+	       			 	and subject_qna like '%'||#{search}||'%' 
+	       			 </if>
+	       			 <if test='category=="content"' >
+	       			 	and content_qna like '%'||#{search}||'%' 
+	       			 </if>
+	       			 
+	       			 order by seq_qna desc )tt
+				  <![CDATA[)where rn >= #{startNum} and rn <= #{endNum}]]>
+	</if>               
+	 
+	<if test='memSEQ!=null and position!="ADMIN"'>
+	select * from (select rownum rn, tt.* from
+	   			(select seq_qna, category_qna, seq_member, subject_qna, content_qna, img, to_char(log_time,'YYYY-MM-DD')as log_time, status, secret, member_id from qna where (secret=0 or seq_member=#{memSEQ} and secret=1) 
+	   			<if test='category=="subject/content"'>
+	   				and (subject_qna like '%'||#{search}||'%' or content_qna like '%'||#{search}||'%')
+	   			</if>
+	   			<if test='category=="subject"'>
+	   				and subject_qna like '%'||#{search}||'%'
+	   			</if>
+	   			<if test='category=="content"'>
+	   				and content_qna like '%'||#{search}||'%'
+	   			</if>
+	   			 order by seq_qna desc  )tt
+			 <![CDATA[ )where rn >= #{startNum} and rn <= #{endNum}]]>
+	</if>
+	
+	<if test='memSEQ!=null and position=="ADMIN"'>
+	select * from (select rownum rn, tt.* from
+	   			(select seq_qna, category_qna, seq_member, subject_qna, content_qna, img, to_char(log_time,'YYYY-MM-DD')as log_time, status, secret, member_id from qna where 
+	   			<if test='category=="subject/content"'>
+	   				 subject_qna like '%'||#{search}||'%' or content_qna like '%'||#{search}||'%'
+	   			</if>
+	   			<if test='category=="subject"'>
+	   				 subject_qna like '%'||#{search}||'%' 
+	   			</if>
+	   			<if test='category=="content"'>
+	   				 content_qna like '%'||#{search}||'%'
+	   			</if>
+	   			 order by seq_qna desc  )tt
+			 <![CDATA[ )where rn >= #{startNum} and rn <= #{endNum}]]>
+	</if>
+</select>
+
+<select id="getSearchListCnt" parameterType="java.util.Map" resultType="int">
+	 select count(*) from qna where 
+	 	<if test='memSEQ==null'>
+	 		secret=0
+	 	</if>
+	 	<if test='memSEQ!=null'>
+	 		(secret=0 or seq_member=#{memSEQ} and secret=1)
+	 	</if>
+	 	<if test='category=="subject/content"'>
+	 		and (subject_qna like '%'||#{search}||'%' or content_qna like '%'||#{search}||'%')
+	 	</if>
+	 	<if test='category=="subject"'>
+	 		and subject_qna like '%'||#{search}||'%'
+	 	</if>
+	 	<if test='category=="content"'>
+		 	and content_qna like '%'||#{search}||'%'
+	 	</if>
+</select>
+
+
+
+<select id="hadReserved" parameterType="java.util.Map" resultType="reservation.bean.ReservationDTO">
+	select * from reservation where seq_restaurant = #{seq_restaurant} and seq_member = #{seq_member}
+</select>
+
+<delete id="cancelBasket" parameterType="java.util.Map">
+	delete basket where seq_member=(select seq_member from member where id=#{id})
+	and seq_restaurant=#{seq_restaurant}
+</delete>
+
+<select id="getAdmin" parameterType="String" resultType="member">
+	select * from member where real_name = #{admin}
+</select>
+
+<select id="isBlack" parameterType="String" resultType="int">
+	select count(*)from blackList where id = #{id}
+</select>
+
+</mapper>

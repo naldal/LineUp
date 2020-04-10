@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+	<context:component-scan base-package="reservation.bean"/>
+	
+	<context:component-scan base-package="member.service" />
+	<context:component-scan base-package="member.bean" />
+	<context:component-scan base-package="member.dao" />
+	
+	<context:component-scan base-package="spring.conf" />
+	
+	<context:component-scan base-package="qna.bean" />
+	
+	<context:component-scan base-package="restaurant.bean" />
+	<context:component-scan base-package="restaurant.dao" />
+	<context:component-scan base-package="restaurant.service" />
+	
+	<context:component-scan base-package="index.bean" />
+	<context:component-scan base-package="index.dao" />
+	<context:component-scan base-package="index.service" />
+	
+	<context:component-scan base-package="admin.bean" />
+	<context:component-scan base-package="admin.dao" />
+	<context:component-scan base-package="admin.service" />
+	
+	
+	<context:component-scan base-package="message.sendMessage" />
+	
+	<!--Mail  -->
+	<bean id="mailSender"
+		class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="smtp.gmail.com" />
+		<property name="port" value="587" />
+		<property name="username"
+			value="coffeeAddictedAngel@gmail.com" />
+		<property name="password" value="dlsnditi9095" />
+		<property name="javaMailProperties">
+			<props>
+				<prop key="mail.transport.protocol">smtp</prop>
+				<prop key="mail.smtp.auth">true</prop>
+				<prop key="mail.smtp.starttls.enable">true</prop>
+				<prop key="mail.debug">true</prop>
+			</props>
+		</property>
+	</bean>
+	
+	
+</beans>

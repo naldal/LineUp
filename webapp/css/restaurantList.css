@@ -1,0 +1,246 @@
+@charset "UTF-8";
+/* * {margin: 0; padding: 0;} */
+* {
+	
+}
+
+.vegan {
+	font-size: 9pt;
+	font-weight: bold;
+	text-align: center;
+	padding-bottom: 100px;
+}
+
+.practice {
+	margin: 20px;
+}
+
+.practice2 {
+	overflow: hidden;
+	width: 800px;
+}
+
+h3 {
+	font: bold 20px/1.5 Helvetica, Verdana, sans-serif;
+	text-align: left;
+}
+
+li img {
+	float: left;
+	margin: 0 15px 0 0;
+}
+
+li p {
+	font-size: 14px;
+	letter-spacing: 1px;
+	font-family: "Noto Serif KR", serif;
+}
+
+.practice_li {
+	padding: 10px;
+	overflow: auto;
+}
+
+.practice_li:hover {
+	background: #eee;
+	cursor: pointer;
+}
+
+#panel-block {
+	width: 600px;
+	margin: 0 auto;
+}
+
+.district-list {
+	width: 100%;
+	height: 100%;
+	float: left;
+	text-align: left;
+	border-left: 1px solid white;
+	border-right: 1px solid white;
+}
+
+.district-list2 {
+	width: 70%;
+	height: 100%;
+	float: left;
+	text-align: left;
+	border-left: 1px solid white;
+	border-right: 1px solid white;
+}
+
+.district-list3 {
+	width: 40%;
+	height: 100%;
+	float: left;
+	text-align: left;
+	border-left: 1px solid white;
+	border-right: 1px solid white;
+}
+
+.district-list ul li, .district-list2 ul li, .district-list3 ul li {
+	padding: 2px;
+	padding-left: 10px;
+	cursor: pointer;
+}
+
+.district-list ul li:hover, .district-list2 ul li:hover, .district-list3 ul li:hover
+	{
+	background-color: rgba(20, 20, 20, 0.1);
+	font-weight: bold;
+}
+.ScrollButton {
+  position: fixed;   
+  right: 10px;       
+  cursor: pointer;   
+  z-index: 10;       
+      
+}
+
+#TopButton {
+ left:90%;
+    top:45%;   
+}
+#BottomButton {
+  left:90%;
+  top:50%;
+}
+
+/* 리스트  */
+#bookBtn {
+	
+}
+
+ul.practice2 {
+	padding: 0 !important;
+	border: none !important;
+}
+
+.dinner-menu .practice2 {
+	overflow: hidden;
+	width: 1200px;
+}
+
+.dinner-menu .practice2 li {
+	overflow: hidden;
+}
+
+.dinner-menu .practice2 li img {
+	padding: 0;
+	margin-left: 13px;
+	width: 258px !important;
+}
+
+.dinner-menu .practice2 .score_form {
+	float: right;
+	width: 150px;
+	height: auto;
+	margin: 0;
+	overflow: auto;
+}
+
+.dinner-menu .practice2 li {
+	border: 1px solid rgba(20, 20, 20, 0.1);
+	margin-bottom: 10px;
+	transition: linear 0.08s;
+}
+
+.dinner-menu .practice2 li button {
+	float: right;
+	width: 100px;
+	height: 45px;
+}
+
+.dinner-menu .practice2 li pre {
+	text-algin: left;
+	white-space: pre-line;
+}
+
+.dinner-menu .practice2 li .box {
+	margin-right: 15px;
+	width: 73%;
+	float: right;
+	height: 230px;
+}
+
+.dinner-menu .practice2 li .box p {
+	text-align: left;
+	padding-top: 10px;
+}
+
+.dinner-menu .practice2 {
+	border: 1px solid rgba(20, 20, 20, 0.1);
+	padding: 10px;
+}
+
+h3 {
+	font-weight: bolder !important;
+}
+
+#loadHeader {
+	margin-bottom: 50px;
+}
+
+#loadFooter {
+	margin-top: 50px;
+}
+
+ul.practice2 li.practice_li:hover {
+	background-color: rgba(245, 246, 250, 1);
+	transition: ease 0.4s;
+	transform: scale(1.02);
+}
+
+#searchOption {
+	background-color: #ffdb4a;
+	border: none;
+	color: white;
+	padding: 12px;
+	width: 120px;
+	height: 41px;
+	font-size: 13px;
+	font-weight: bold;
+	/*   box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2); */
+	-webkit-appearance: button;
+	appearance: button;
+	outline: none;
+}
+
+#searchOption::before {
+	content: "\f13a";
+	font-family: FontAwesome;
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 20%;
+	height: 100%;
+	text-align: center;
+	font-size: 28px;
+	line-height: 45px;
+	color: rgba(255, 255, 255, 0.5);
+	background-color: rgba(255, 255, 255, 0.1);
+	pointer-events: none;
+}
+
+#searchOption:hover::before {
+	color: rgba(255, 255, 255, 0.6);
+	background-color: rgba(255, 255, 255, 0.2);
+}
+
+#searchOption option {
+	padding: 30px;
+}
+
+#restaurantPagingDiv {
+	display: inline-block;
+	width: 700px;
+	text-align: center;
+}
+
+practice2>practice_li>.box>div {
+	text-align: left;
+	color: #555;
+	margin-top: 10px;
+	font-weight: bold;
+	font-size: 30px !important;
+}

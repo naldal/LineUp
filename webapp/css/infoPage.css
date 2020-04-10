@@ -1,0 +1,60 @@
+@import url("https://fonts.googleapis.com/css?family=Lato|Poppins|Kaushan+Script");
+
+html {
+  font-family: 'Poppins', Lato, Tahoma, sans-serif;
+  width: 100%;
+  min-height: 100%;
+}
+
+@media (max-width: 599px) {
+  .hero .hero-foot {
+    display: none;
+  }
+}
+
+
+.main-content {
+  padding-top: 2rem;
+  color: #3c4172;
+  font-family: 'Poppins', sans-serif;
+}
+
+.main-content .section-light {
+  padding: 30px;
+}
+
+.main-content .section-light.about-me {
+  padding-bottom: 100px;
+}
+
+.main-content .section-light.about-me .is-larger {
+  font-size: 1.2rem;
+}
+
+@media (max-width: 599px) {
+  .main-content .section-light.about-me .about-links {
+    text-align: center;
+  }
+}
+
+.main-content .section-light.about-me .right-image img {
+  border-radius: 11px;
+  margin: 20px;
+  box-shadow: 0 5px 20px rgba(14, 25, 80, 0.3);
+}
+
+@media (max-width: 599px) {
+  .main-content .section-light.about-me .right-image img {
+    margin: auto;
+  }
+}
+
+
+@media (max-width: 599px) {
+  .main-content .section-light.contact {
+    padding: 60px 20px;
+  }
+}
+
+.white
+{color:ghostwhite}
